@@ -45,3 +45,35 @@ body {
     [data-theme="light"] .app-header p {
         color: #555 !important;
     }
+
+.offline-message {
+    min-height: 100vh;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    text-align: center;
+}
+
+    .offline-message h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 52px);
+        line-height: 1.15;
+    }
+
+    .offline-message p {
+        margin: 0;
+        font-size: clamp(15px, 2vw, 20px);
+        opacity: .75;
+        max-width: 700px;
+    }
+
+.offline-image {
+    width: min(75vw, 420px);
+    max-height: 50vh;
+    object-fit: contain;
+    display: block;
+}
+
