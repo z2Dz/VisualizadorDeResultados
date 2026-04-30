@@ -1,0 +1,76 @@
+﻿@using VisualizadorDeResultadosBolão.Models
+
+@if (Jogos?.Any() == true)
+{
+    <!-- DESKTOP -->
+    <div class="jogos-desktop">
+        <div class="jogos-scroll">
+            @foreach (var jogo in Jogos)
+            {
+                <div class="jogo-card">
+                    <div class="times-row">
+                        <span>@jogo.MandanteSigla</span>
+                        <span>x</span>
+                        <span>@jogo.VisitanteSigla</span>
+                    </div>
+
+                    <div class="escudos-row">
+                        <img src="@jogo.MandanteEscudo" class="time-escudo" />
+                        <img src="@jogo.VisitanteEscudo" class="time-escudo" />
+                    </div>
+
+                    <div class="placar-box">
+                        <strong>@jogo.GolsMandante</strong>
+                        <span>x</span>
+                        <strong>@jogo.GolsVisitante</strong>
+                    </div>
+
+                    <small>@jogo.Status</small>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- MOBILE -->
+    <div class="jogos-mobile-card">
+        @foreach (var jogo in JogosExibidos)
+        {
+            <div class="jogo-mobile-row">
+                <img src="@jogo.MandanteEscudo" />
+                <span class="time-mobile">@jogo.MandanteSigla</span>
+
+                <div class="placar-mobile">
+                    <strong>@jogo.GolsMandante</strong>
+                    <span>x</span>
+                    <strong>@jogo.GolsVisitante</strong>
+                    <small>@jogo.Status</small>
+                </div>
+
+                <span class="time-mobile right">@jogo.VisitanteSigla</span>
+                <img src="@jogo.VisitanteEscudo" />
+            </div>
+        }
+
+        @if (Jogos.Count > 5)
+        {
+            <button class="ver-jogos-btn" @onclick="ToggleExpandir">
+                @(mostrarTodos ? "Ver menos jogos" : "Ver todos os jogos")
+            </button>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public List<RodadaJogoModel> Jogos { get; set; } = new();
+
+    private bool mostrarTodos = false;
+
+    private List<RodadaJogoModel> JogosExibidos =>
+        mostrarTodos ? Jogos : Jogos.Take(5).ToList();
+
+    private void ToggleExpandir()
+    {
+        mostrarTodos = !mostrarTodos;
+    }
+}

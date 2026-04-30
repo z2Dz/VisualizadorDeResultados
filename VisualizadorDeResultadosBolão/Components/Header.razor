@@ -1,0 +1,23 @@
+﻿@using VisualizadorDeResultadosBolão.Models
+<header class="app-header">
+    <div class="header-left">
+        <img src="/logo.png" class="header-logo" />
+
+        <div class="header-text">
+            <h1>@Rodada?.rodadaNome?.ToUpper()</h1>
+
+            <div class="header-subrow">
+                <p>@DateTime.Now.ToString("dddd, dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-BR"))</p>
+
+                <div class="inline-theme-toggle">
+                    <ThemeToggle />
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+@code {
+    [Parameter]
+    public RodadaModel? Rodada { get; set; }
+}

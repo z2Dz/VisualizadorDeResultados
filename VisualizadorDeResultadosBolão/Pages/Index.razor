@@ -1,0 +1,60 @@
+﻿@page "/"
+@inject VisualizadorDeResultadosBolão.Services.SupaBaseService Supabase
+@using VisualizadorDeResultadosBolão.Models
+
+<InstallPrompt />
+<div class="page-shell">
+
+    @if (carregando)
+    {
+        <p>Carregando...</p>
+    }
+    else if (rodadaAberta == null)
+    {
+        <p>Nenhuma rodada aberta no momento.</p>
+    }
+    else
+    {
+        <Header Rodada="@rodadaAberta" />
+
+        <main class="main-container">
+            <section class="section-card">
+                <div class="section-title">
+                    <h2>Jogos da Rodada ⚽</h2>
+                </div>
+
+                <JogosRodada Jogos="jogos" />
+            </section>
+
+            <section class="section-card">
+                <div class="section-title">
+                    <h2>Palpites dos Jogadores</h2>
+                </div>
+
+                <TabelaPalpites Palpites="palpites" Jogos="jogos" />
+            </section>
+        </main>
+
+        <FooterAviso/>
+    }
+</div>
+
+@code {
+    private RodadaModel? rodadaAberta;
+    private List<RodadaJogoModel> jogos = new();
+    private List<PalpiteModel> palpites = new();
+    private bool carregando = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        rodadaAberta = await Supabase.GetRodadaAbertaAsync();
+
+        if (rodadaAberta != null)
+        {
+            jogos = await Supabase.GetJogosDaRodadaAsync(rodadaAberta.rodadaID);
+            palpites = await Supabase.GetPalpitesDaRodadaAsync(rodadaAberta.rodadaID);
+        }
+
+        carregando = false;
+    }
+}

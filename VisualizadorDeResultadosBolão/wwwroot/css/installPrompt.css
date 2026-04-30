@@ -1,0 +1,73 @@
+﻿.install-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 20px !important;
+    background: rgba(0,0,0,.35);
+    transform: none !important;
+}
+
+.install-card {
+    width: min(100%, 360px);
+    background: #0f1f39;
+    border: 1px solid rgba(120,160,255,.18);
+    border-radius: 20px;
+    padding: 22px;
+    color: white;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    transform: none !important;
+    margin: 0;
+}
+
+    .install-card h3 {
+        margin: 0 0 8px;
+    }
+
+    .install-card p {
+        margin: 0 0 18px;
+        color: #9fb2d1;
+    }
+
+.install-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.install-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+    .install-btn.primary {
+        background: #356dc9;
+        color: white;
+    }
+
+    .install-btn.secondary {
+        background: rgba(255,255,255,.08);
+        color: white;
+    }
+
+/* LIGHT MODE */
+[data-theme="light"] .install-card {
+    background: #f3f3f3;
+    color: #111;
+}
+
+    [data-theme="light"] .install-card p {
+        color: #555;
+    }
+
+[data-theme="light"] .install-btn.secondary {
+    background: rgba(0,0,0,.06);
+    color: #111;
+}

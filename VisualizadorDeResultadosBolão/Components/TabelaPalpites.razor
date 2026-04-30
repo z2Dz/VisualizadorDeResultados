@@ -1,0 +1,125 @@
+﻿@using VisualizadorDeResultadosBolão.Models
+
+<div class="palpites-card">
+
+    <!-- BUSCA -->
+    <div class="busca-jogador-box">
+        <input type="text"
+               placeholder="Pesquisar jogador..."
+               class="busca-jogador-input"
+               @bind="filtroJogador"
+               @bind:event="oninput" />
+    </div>
+
+    <div class="palpites-wrapper">
+        <table class="palpites-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="jogador-col">Jogador</th>
+
+                    @foreach (var jogo in Jogos)
+                    {
+                        <th>@jogo.MandanteSigla x @jogo.VisitanteSigla</th>
+                    }
+
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var jogador in LinhasFiltradas)
+                {
+                    <tr>
+                        <td class="posicao-col">@jogador.Posicao</td>
+                        <td class="jogador-col">@jogador.Nome</td>
+
+                        @foreach (var jogo in Jogos)
+                        {
+                            var palpite = jogador.Palpites.FirstOrDefault(p => p.RodadaJogoId == jogo.RodadaJogoId);
+
+                            <td>
+                                <span class="palpite @(GetClassePalpite(palpite))">
+                                    @(palpite?.PalpiteLabel ?? "-")
+                                </span>
+                            </td>
+                        }
+
+                        <td class="total-col">@jogador.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="palpites-footer">
+        <div class="footer-legenda">
+            <div class="legenda-item">
+                <span class="legenda-cor verde"></span>
+                <span>= +3 Pontos</span>
+            </div>
+
+            <div class="legenda-item">
+                <span class="legenda-cor amarelo"></span>
+                <span>= +1 Ponto</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<PalpiteModel> Palpites { get; set; } = new();
+
+    [Parameter]
+    public List<RodadaJogoModel> Jogos { get; set; } = new();
+
+    private string filtroJogador = "";
+
+    private List<LinhaJogador> Linhas =>
+        Palpites
+            .GroupBy(p => new { p.JogadoresId, p.JogadoresNome })
+            .Select(g => new LinhaJogador
+            {
+                Nome = g.Key.JogadoresNome,
+                Palpites = g.ToList(),
+                Total = g.Sum(x => x.PalpiteTotalPontos ?? 0)
+            })
+            .OrderByDescending(x => x.Total)
+            .ThenBy(x => x.Nome)
+            .Select((x, index) =>
+            {
+                x.Posicao = index + 1;
+                return x;
+            })
+            .ToList();
+
+    private List<LinhaJogador> LinhasFiltradas =>
+        string.IsNullOrWhiteSpace(filtroJogador)
+            ? Linhas
+            : Linhas
+                .Where(x => x.Nome.Contains(filtroJogador, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+    private string GetClassePalpite(PalpiteModel? palpite)
+    {
+        if (palpite == null)
+            return "";
+
+        return palpite.PalpiteTotalPontos switch
+        {
+            3 => "certo",
+            1 => "pontual",
+            _ => ""
+        };
+    }
+
+    private class LinhaJogador
+    {
+        public int Posicao { get; set; }
+        public string Nome { get; set; } = "";
+        public int Total { get; set; }
+        public List<PalpiteModel> Palpites { get; set; } = new();
+    }
+}

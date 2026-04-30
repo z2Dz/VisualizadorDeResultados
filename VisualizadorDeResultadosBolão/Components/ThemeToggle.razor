@@ -1,0 +1,23 @@
+﻿@inject IJSRuntime JS
+
+<div class="theme-switch @(isDark ? "dark" : "light")" @onclick="ToggleTheme">
+    <div class="switch-thumb">
+        <span>@(isDark ? "🌙" : "☀️")</span>
+    </div>
+</div>
+
+@code {
+    private bool isDark = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var theme = await JS.InvokeAsync<string>("themeManager.loadTheme");
+        isDark = theme != "light";
+    }
+
+    private async Task ToggleTheme()
+    {
+        isDark = !isDark;
+        await JS.InvokeVoidAsync("themeManager.setTheme", isDark ? "dark" : "light");
+    }
+}

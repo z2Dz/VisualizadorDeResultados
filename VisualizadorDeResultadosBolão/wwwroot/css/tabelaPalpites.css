@@ -1,0 +1,202 @@
+﻿.busca-jogador-box {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.busca-jogador-input {
+    width: min(100%, 340px);
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(120,160,255,.18);
+    background: rgba(10, 25, 50, .70);
+    color: #ffffff;
+    font-weight: 600;
+    outline: none;
+}
+
+    .busca-jogador-input::placeholder {
+        color: rgba(255,255,255,.45);
+    }
+
+    .busca-jogador-input:focus {
+        border-color: rgba(127,176,255,.75);
+        box-shadow: 0 0 0 3px rgba(127,176,255,.12);
+    }
+
+/* LIGHT MODE */
+[data-theme="light"] .busca-jogador-input {
+    background: #f3f3f3;
+    border: 1px solid rgba(0,0,0,.08);
+    color: #111;
+}
+
+    [data-theme="light"] .busca-jogador-input::placeholder {
+        color: rgba(0,0,0,.45);
+    }
+
+/* ===========================
+   TABELA
+=========================== */
+
+.palpites-card {
+    background: rgba(18, 28, 52, .88);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    border: 1px solid rgba(120,160,255,.14);
+    overflow: hidden;
+}
+
+.palpites-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 10px;
+    border-radius: 14px;
+}
+
+.palpites-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    color: var(--text);
+}
+
+    .palpites-table th {
+        background: rgba(255,255,255,.06);
+        color: var(--subtext);
+        padding: 14px 12px;
+        font-weight: 700;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .palpites-table td {
+        padding: 12px 10px;
+        text-align: center;
+        white-space: nowrap;
+        border-bottom: 1px solid rgba(255,255,255,.04);
+        font-weight: 600;
+    }
+
+    .palpites-table tbody tr:nth-child(odd) {
+        background: rgba(255,255,255,.03);
+    }
+
+    .palpites-table tbody tr:nth-child(even) {
+        background: rgba(255,255,255,.06);
+    }
+
+.posicao-col {
+    width: 42px;
+    min-width: 42px;
+    font-weight: 800;
+}
+
+.jogador-col {
+    text-align: left !important;
+    min-width: 220px;
+    padding-left: 16px !important;
+    font-weight: 500;
+}
+
+.total-col {
+    font-weight: 900;
+    min-width: 70px;
+}
+
+/* ===========================
+   PALPITES
+=========================== */
+
+.palpite {
+    display: inline-block;
+    min-width: 52px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+}
+
+    .palpite.certo {
+        background: #239327 !important;
+        color: #ffffff !important;
+    }
+
+    .palpite.pontual {
+        background: #d6df00 !important;
+        color: #111111 !important;
+    }
+
+/* ===========================
+   RODAPÉ DA TABELA
+=========================== */
+
+.palpites-footer {
+    margin-top: 16px;
+    padding: 14px 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    color: var(--subtext);
+    font-weight: 600;
+}
+
+.footer-legenda {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legenda-cor {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+    .legenda-cor.verde {
+        background: #239327;
+    }
+
+    .legenda-cor.amarelo {
+        background: #d6df00;
+    }
+
+.footer-total {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+/* LIGHT MODE */
+[data-theme="light"] .palpites-card {
+    background: #f3f3f3 !important;
+    border: 1px solid rgba(0,0,0,.05) !important;
+    color: #111 !important;
+}
+
+[data-theme="light"] .palpites-table th {
+    background: rgba(0,0,0,.04);
+    color: #444;
+}
+
+[data-theme="light"] .palpites-table tbody tr:nth-child(odd) {
+    background: rgba(0,0,0,.015);
+}
+
+[data-theme="light"] .palpites-table tbody tr:nth-child(even) {
+    background: rgba(0,0,0,.035);
+}
