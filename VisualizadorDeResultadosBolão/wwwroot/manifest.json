@@ -1,7 +1,7 @@
 {
   "name": "Visualizador de Resultados Bolão",
   "short_name": "Bolão",
-  "start_url": "/",
+  "start_url": "/VisualizadorDeResultados/",
   "display": "standalone",
   "background_color": "#07142B",
   "theme_color": "#07142B",
