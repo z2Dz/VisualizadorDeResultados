@@ -3,48 +3,50 @@
 @using VisualizadorDeResultadosBolão.Models
 
 <InstallPrompt />
+
 <div class="page-shell">
     @if (!acessoLiberado)
     {
         <div class="offline-message">
-            <img src="telaSemRodada.png" class="offline-image" alt="Visualizador de Resultados Indisponível" />
+            <img src="telaSemRodada.png" class="offline-image" />
             <h1>Visualizador de Resultados Indisponível no momento!</h1>
         </div>
     }
+    else if (carregando)
+    {
+        <p>Carregando...</p>
+    }
+    else if (!string.IsNullOrWhiteSpace(erroCarregamento))
+    {
+        <p>Erro ao carregar: @erroCarregamento</p>
+    }
+    else if (rodadaAberta == null)
+    {
+        <p>Nenhuma rodada aberta no momento.</p>
+    }
     else
     {
-        @if (carregando)
-        {
-            <p>Carregando...</p>
-        }
-        else if (rodadaAberta == null)
-        {
-            <p>Nenhuma rodada aberta no momento.</p>
-        }
-        else
-        {
-            <Header Rodada="@rodadaAberta" />
+        <Header Rodada="@rodadaAberta" />
 
-            <main class="main-container">
-                <section class="section-card">
-                    <div class="section-title">
-                        <h2>Jogos da Rodada ⚽</h2>
-                    </div>
+        <main class="main-container">
+            <section class="section-card">
+                <div class="section-title">
+                    <h2>Jogos da Rodada ⚽</h2>
+                </div>
 
-                    <JogosRodada Jogos="jogos" />
-                </section>
+                <JogosRodada Jogos="jogos" />
+            </section>
 
-                <section class="section-card">
-                    <div class="section-title">
-                        <h2>Palpites dos Jogadores</h2>
-                    </div>
+            <section class="section-card">
+                <div class="section-title">
+                    <h2>Palpites dos Jogadores</h2>
+                </div>
 
-                    <TabelaPalpites Palpites="palpites" Jogos="jogos" />
-                </section>
-            </main>
+                <TabelaPalpites Palpites="palpites" Jogos="jogos" />
+            </section>
+        </main>
 
-            <FooterAviso />
-        }
+        <FooterAviso />
     }
 </div>
 
@@ -52,18 +54,27 @@
     private RodadaModel? rodadaAberta;
     private List<RodadaJogoModel> jogos = new();
     private List<PalpiteModel> palpites = new();
+
     private bool carregando = true;
     private bool acessoLiberado;
+    private string? erroCarregamento;
 
     protected override async Task OnInitializedAsync()
     {
-
         try
         {
-            var brasilZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
-            var agoraBrasil = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, brasilZone);
+            var agoraBrasil = DateTime.UtcNow.AddHours(-3);
 
-            acessoLiberado = agoraBrasil.DayOfWeek == DayOfWeek.Saturday || agoraBrasil.DayOfWeek == DayOfWeek.Sunday || agoraBrasil.DayOfWeek == DayOfWeek.Monday;
+            acessoLiberado =
+                agoraBrasil.DayOfWeek == DayOfWeek.Saturday ||
+                agoraBrasil.DayOfWeek == DayOfWeek.Sunday ||
+                agoraBrasil.DayOfWeek == DayOfWeek.Monday;
+
+            if (!acessoLiberado)
+            {
+                carregando = false;
+                return;
+            }
 
             rodadaAberta = await Supabase.GetRodadaAbertaAsync();
 
@@ -72,21 +83,14 @@
                 jogos = await Supabase.GetJogosDaRodadaAsync(rodadaAberta.rodadaID);
                 palpites = await Supabase.GetPalpitesDaRodadaAsync(rodadaAberta.rodadaID);
             }
-
+        }
+        catch (Exception ex)
+        {
+            erroCarregamento = ex.Message;
+        }
+        finally
+        {
             carregando = false;
         }
-        catch
-        {
-            // fallback para Linux/GitHub Pages
-            var brasilZone = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
-            var agoraBrasil = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, brasilZone);
-
-            acessoLiberado =
-                agoraBrasil.DayOfWeek == DayOfWeek.Saturday ||
-                agoraBrasil.DayOfWeek == DayOfWeek.Sunday;
-        }
-        
     }
-
-    
 }
