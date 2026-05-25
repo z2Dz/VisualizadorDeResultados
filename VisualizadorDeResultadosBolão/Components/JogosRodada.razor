@@ -7,6 +7,8 @@
         <div class="jogos-scroll">
             @foreach (var jogo in Jogos)
             {
+                var stats = ObterEstatisticas(jogo);
+
                 <div class="jogo-card">
                     <div class="times-row">
                         <span>@jogo.MandanteSigla</span>
@@ -24,8 +26,26 @@
                         <span>x</span>
                         <strong>@jogo.GolsVisitante</strong>
                     </div>
+                    <div class="stats-bar-container">
+                       <span class="stats-text"> Palpites do Jogadores </span>
+                       <div class="stats-bar">
+                            <div class="bar-home" style="width:@($"{stats.Casa}%")"/>
+                            <div class="bar-draw" style="width:@($"{stats.Empate}%")"/>
+                            <div class="bar-away" style="width:@($"{stats.Fora}%")"/>
+                       </div>
+                    </div>
 
-                    <small>@jogo.Status</small>
+                    <div class="stats-percent">
+                        <span>@stats.Casa%</span>
+                        <span>@stats.Empate%</span>
+                        <span>@stats.Fora%</span>
+                    </div>
+
+                    <div class="stats-row">
+                        <span class="stat-col left">C</span>
+                        <span class="stat-col center">E</span>
+                        <span class="stat-col right">F</span>
+                    </div>
                 </div>
             }
         </div>
@@ -35,19 +55,44 @@
     <div class="jogos-mobile-card">
         @foreach (var jogo in JogosExibidos)
         {
-            <div class="jogo-mobile-row">
-                <img src="@jogo.MandanteEscudo" />
-                <span class="time-mobile">@jogo.MandanteSigla</span>
+            var stats = ObterEstatisticas(jogo);
 
-                <div class="placar-mobile">
-                    <strong>@jogo.GolsMandante</strong>
-                    <span>x</span>
-                    <strong>@jogo.GolsVisitante</strong>
-                    <small>@jogo.Status</small>
+            <div class="jogo-mobile-item">
+                <div class="jogo-mobile-row">
+                    <img src="@jogo.MandanteEscudo" />
+                    <span class="time-mobile">@jogo.MandanteSigla</span>
+
+                    <div class="placar-mobile">
+                        <strong>@jogo.GolsMandante</strong>
+                        <span>x</span>
+                        <strong>@jogo.GolsVisitante</strong>
+                    </div>
+
+                    <span class="time-mobile right">@jogo.VisitanteSigla</span>
+                    <img src="@jogo.VisitanteEscudo" />
                 </div>
 
-                <span class="time-mobile right">@jogo.VisitanteSigla</span>
-                <img src="@jogo.VisitanteEscudo" />
+                <div class="stats-bar-container">
+                    <span class="stats-text"> Palpites do Jogadores </span>
+                    <div class="stats-bar-container">
+                        <div class="stats-bar">
+                            <div class="bar-home" style="width:@($"{stats.Casa}%")"></div>
+                            <div class="bar-draw" style="width:@($"{stats.Empate}%")"></div>
+                            <div class="bar-away" style="width:@($"{stats.Fora}%")"></div>
+                        </div>
+                    </div>
+                    <div class="stats-percent">
+                        <span>@stats.Casa%</span>
+                        <span>@stats.Empate%</span>
+                        <span>@stats.Fora%</span>
+                    </div>
+
+                    <div class="stats-row">
+                        <span class="stat-col left">Casa</span>
+                        <span class="stat-col center">Empate</span>
+                        <span class="stat-col right">Fora</span>
+                    </div>
+                </div>
             </div>
         }
 
@@ -64,6 +109,9 @@
     [Parameter]
     public List<RodadaJogoModel> Jogos { get; set; } = new();
 
+    [Parameter]
+    public List<PalpiteModel> Palpites { get; set; } = new();
+
     private bool mostrarTodos = false;
 
     private List<RodadaJogoModel> JogosExibidos =>
@@ -72,5 +120,34 @@
     private void ToggleExpandir()
     {
         mostrarTodos = !mostrarTodos;
+    }
+
+    private EstatisticaModel ObterEstatisticas(RodadaJogoModel jogo)
+    {
+        var palpitesJogo = Palpites.Where(p => p.JogoId == jogo.JogoId).ToList();
+
+        if(!palpitesJogo.Any())
+            return new EstatisticaModel();
+
+        int total = palpitesJogo.Count;
+        int casa = palpitesJogo.Count(p => p.PalpiteMandante > p.PalpiteVisitante);
+
+        int empate = palpitesJogo.Count(p => p.PalpiteMandante == p.PalpiteVisitante);
+
+        int fora = palpitesJogo.Count(p => p.PalpiteMandante < p.PalpiteVisitante);
+
+            return new EstatisticaModel
+            {
+                Casa = (casa * 100) / total,
+                Empate = (empate * 100) / total,
+                Fora = (fora * 100) / total
+            };
+    }
+
+    public class EstatisticaModel
+    {
+        public int Casa { get; set; }
+        public int Empate { get; set; }
+        public int Fora { get; set; }
     }
 }

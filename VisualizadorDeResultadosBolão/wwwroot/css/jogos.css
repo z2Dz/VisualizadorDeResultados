@@ -51,6 +51,98 @@
     margin: auto;
 }
 
+.stats-bar-cotainer{
+    width: 100%;
+    margin-top: 8px;
+}
+
+.stats-labels,
+.stats-percent {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stats-percent{
+    margin-top: 4px;
+}
+
+.stats-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    display: flex;
+    background: #e5e7eb;
+}
+
+.bar-home{
+    background: #2563eb;
+    transition: 0.3s;
+}
+
+.bar-draw {
+    background: #9ca3af;
+    transition: 0.3s;
+}
+
+.bar-away {
+    background: #dc2626;
+    transition: 0.3s;
+    flex-grow: 1;
+}
+
+.stats-labels.mobile,
+.stats-percent.mobile{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.stats-text{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    width: 100%;
+    font-size: 12px;
+}
+
+.stats-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 12px;
+    width: 100%;
+    padding: 0 4px;
+    box-sizing: border-box;
+}
+
+.stat-col{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+}
+
+    .stat-col.left {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .stat-col.center {
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-col.right {
+        align-items: flex-end;
+        text-align: right;
+    }
+
+
 .placar-box {
     display: flex;
     justify-content: center;
