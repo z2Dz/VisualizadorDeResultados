@@ -65,10 +65,7 @@
         {
             var agoraBrasil = DateTime.UtcNow.AddHours(-3);
 
-            acessoLiberado =
-                agoraBrasil.DayOfWeek == DayOfWeek.Saturday ||
-                agoraBrasil.DayOfWeek == DayOfWeek.Sunday ||
-                agoraBrasil.DayOfWeek == DayOfWeek.Monday;
+            acessoLiberado = true;
 
             if (!acessoLiberado)
             {
