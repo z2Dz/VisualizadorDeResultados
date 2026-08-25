@@ -8,7 +8,7 @@
     @if (!acessoLiberado)
     {
         <div class="offline-message">
-            <img src="telaSemRodada.png" class="offline-image" />
+            <img src="images/telaSemRodada.png" class="offline-image" />
             <h1>Visualizador de Resultados Indisponível no momento!</h1>
         </div>
     }
@@ -56,26 +56,26 @@
     private List<PalpiteModel> palpites = new();
 
     private bool carregando = true;
-    private bool acessoLiberado;
+    private bool acessoLiberado = true;
     private string? erroCarregamento;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            @*
             var agoraBrasil = DateTime.UtcNow.AddHours(-3);
 
-            acessoLiberado =
-                agoraBrasil.DayOfWeek == DayOfWeek.Saturday ||
-                agoraBrasil.DayOfWeek == DayOfWeek.Sunday ||
-                agoraBrasil.DayOfWeek == DayOfWeek.Monday;
+            acessoLiberado = agoraBrasil.DayOfWeek == DayOfWeek.Saturday ||
+                             agoraBrasil.DayOfWeek == DayOfWeek.Sunday ||
+                             agoraBrasil.DayOfWeek == DayOfWeek.Monday;
 
             if (!acessoLiberado)
             {
                 carregando = false;
                 return;
             }
-
+            *@
             rodadaAberta = await Supabase.GetRodadaAbertaAsync();
 
             if (rodadaAberta != null)

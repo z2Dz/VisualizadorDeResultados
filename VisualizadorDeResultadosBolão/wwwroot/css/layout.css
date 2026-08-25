@@ -1,0 +1,227 @@
+﻿/* ==========================================================================
+   BASE / SHELL
+   ========================================================================== */
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background: radial-gradient(circle at bottom right, rgba(146, 167, 187, .72), transparent 35%), var(--color-1);
+    color: var(--text);
+}
+
+.page-shell {
+    min-height: 100vh;
+    background: radial-gradient(circle at bottom right, rgba(146, 167, 187, .72), transparent 35%), var(--color-1);
+}
+
+.main-container {
+    padding: 0 20px 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    body {
+        border: none !important;
+    }
+
+    .page-shell {
+        transform: scale(1);
+        transform-origin: top center;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .main-container {
+        padding: 0 0px 24px !important;
+    }
+}
+
+/* ==========================================================================
+   SECTION CARD
+   ========================================================================== */
+
+.section-card {
+    background: var(--panel-bg);
+    border: var(--panel-border-width) solid var(--panel-border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    color: var(--text);
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+    .section-title h2 {
+        font-family: var(--font-heading);
+        margin: 0;
+    }
+
+@media (max-width: 768px) {
+    .section-card {
+        padding: 14px !important;
+        border-radius: var(--radius) !important;
+        margin-bottom: 16px !important;
+    }
+
+    .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+        .section-title h2 {
+            font-size: 30px !important;
+            line-height: 1.1 !important;
+        }
+}
+
+/* ==========================================================================
+   TELA DE OFFLINE
+   ========================================================================== */
+
+.offline-message {
+    min-height: 100vh;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    text-align: center;
+}
+
+    .offline-message h1 {
+        margin: 0;
+        font-family: var(--font-heading);
+        font-size: clamp(28px, 4vw, 52px);
+        line-height: 1.15;
+    }
+
+    .offline-message p {
+        margin: 0;
+        font-size: clamp(15px, 2vw, 20px);
+        opacity: .75;
+        max-width: 700px;
+    }
+
+.offline-image {
+    width: min(75vw, 420px);
+    max-height: 50vh;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==========================================================================
+   SPLASH SCREEN
+   ========================================================================== */
+
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at bottom right, rgba(90,130,210,.22), transparent 35%), #07142B;
+}
+
+.splash-logo {
+    width: clamp(140px, 20vw, 260px);
+    height: auto;
+    object-fit: contain;
+    display: block;
+    animation: splashPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes splashPulse {
+    0% {
+        transform: scale(1);
+        opacity: .92;
+    }
+
+    50% {
+        transform: scale(1.06);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: .92;
+    }
+}
+
+@media (max-width: 768px) {
+    .splash-logo {
+        width: 150px;
+    }
+}
+
+/* ==========================================================================
+   PROMPT DE INSTALAÇÃO (PWA)
+   ========================================================================== */
+
+.install-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+    background: rgba(0,0,0,.35);
+    transform: none !important;
+}
+
+.install-card {
+    width: min(100%, 360px);
+    background: var(--panel-bg);
+    border: var(--panel-border-width) solid var(--panel-border-color);
+    border-radius: var(--radius);
+    padding: 22px;
+    color: var(--text);
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    transform: none !important;
+    margin: 0;
+}
+
+    .install-card h3 {
+        margin: 0 0 8px;
+        font-family: var(--font-heading);
+    }
+
+    .install-card p {
+        margin: 0 0 18px;
+        color: var(--subtext);
+    }
+
+.install-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.install-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 800;
+    font-family: var(--font-main);
+    cursor: pointer;
+}
+
+    .install-btn.primary {
+        background: var(--accent);
+        color: var(--accent-text);
+    }
+
+    .install-btn.secondary {
+        background: var(--overlay-soft);
+        color: var(--text);
+    }

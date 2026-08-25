@@ -1,66 +1,161 @@
-﻿.theme-switch {
-    width: 78px;
+﻿/* ==========================================================================
+   SELETOR DE TEMA (dropdown)
+   ========================================================================== */
+
+.theme-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     height: 40px;
+    padding: 0 34px 0 16px;
     border-radius: 999px;
-    position: relative;
+    border: 1px solid rgba(120, 160, 255, .28);
+    background-color: rgba(10, 25, 50, .70);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237fb0ff' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 4px;
-    transition: all 0.4s ease;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,.15);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
-    .theme-switch.dark {
-        background: linear-gradient(135deg, #111, #2c2c2c);
-        justify-content: flex-start;
+    .theme-select:hover {
+        border-color: rgba(127,176,255,.5);
     }
 
-    .theme-switch.light {
-        background: linear-gradient(135deg, #f2f2f2, #dcdcdc);
-        justify-content: flex-end;
+    .theme-select:focus {
+        border-color: rgba(127,176,255,.75);
+        box-shadow: 0 0 0 3px rgba(127,176,255,.12);
     }
 
-.switch-thumb {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ffffff, #d9d9d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.4s ease;
-    box-shadow: 0 3px 8px rgba(0,0,0,.25);
-}
+    .theme-select option {
+        background: #0a1932;
+        color: #ffffff;
+    }
 
-.theme-switch.dark .switch-thumb {
-    background: linear-gradient(135deg, #f8f8f8, #d8d8d8);
-}
-
-.theme-switch.light .switch-thumb {
-    background: linear-gradient(135deg, #2f2f2f, #111);
-    color: white;
-}
-
-.icon {
-    transition: transform 0.4s ease;
-}
-
-.theme-switch:hover .switch-thumb {
-    transform: scale(1.08);
-}
-
-/* MOBILE */
+/* RESPONSIVO */
 @media (max-width: 768px) {
-    .theme-switch {
-        width: 58px !important;
-        height: 30px !important;
-    }
-
-    .switch-thumb {
-        width: 22px !important;
-        height: 22px !important;
+    .theme-select {
+        height: 32px !important;
+        padding: 0 28px 0 12px !important;
         font-size: 12px !important;
+        background-position: right 10px center;
     }
 }
+
+/* ==========================================================================
+   TEMAS
+   ========================================================================== */
+
+[data-theme="retroos"] .theme-select {
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 1.05rem;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231f3d3a' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #1f2a28;
+    border: 2px inset #cfc7ae;
+    border-radius: 0;
+}
+
+    [data-theme="retroos"] .theme-select option {
+        background: #ece6d5;
+        color: #1f2a28;
+    }
+
+[data-theme="afc"] .theme-select {
+    font-family: "Oswald", "Segoe UI", sans-serif;
+    font-weight: 600;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a0c0c' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #201208;
+    border: 2px solid #7a0c0c;
+    border-radius: 10px;
+}
+
+    [data-theme="afc"] .theme-select option {
+        background: #fffaf2;
+        color: #201208;
+    }
+
+[data-theme="sketch"] .theme-select {
+    font-family: "Kalam", "Comic Neue", cursive;
+    font-weight: 700;
+    background-color: #fffdf6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333333' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #2b2b2b;
+    border: 2.5px dashed #333333;
+    border-radius: 8px 180px 8px 180px / 180px 8px 180px 8px;
+}
+
+    [data-theme="sketch"] .theme-select option {
+        background: #fffdf6;
+        color: #2b2b2b;
+    }
+
+[data-theme="minimal"] .theme-select {
+    font-family: "Space Grotesk", "Arial Black", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23111111' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #111111;
+    border: 3px solid #111111;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 #111111;
+}
+
+    [data-theme="minimal"] .theme-select option {
+        background: #ffffff;
+        color: #111111;
+    }
+
+[data-theme="brutal"] .theme-select {
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000000' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #111111;
+    border: 3px solid #000000;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0 #000000;
+}
+
+    [data-theme="brutal"] .theme-select option {
+        background: #ffffff;
+        color: #111111;
+    }
+
+[data-theme="pixel"] .theme-select {
+    font-family: "Press Start 2P", "Courier New", monospace;
+    font-size: 0.65rem;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231f1f1f' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #1f1f1f;
+    border: 3px solid #1f1f1f;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 #1f1f1f;
+}
+
+    [data-theme="pixel"] .theme-select option {
+        background: #ffffff;
+        color: #1f1f1f;
+    }
+
+[data-theme="retro"] .theme-select {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #150532;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300f6ff' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: #00f6ff;
+    border: 1px solid #ff2e97;
+    box-shadow: 0 0 8px rgba(255,46,151,.5);
+}
+
+    [data-theme="retro"] .theme-select option {
+        background: #150532;
+        color: #00f6ff;
+    }

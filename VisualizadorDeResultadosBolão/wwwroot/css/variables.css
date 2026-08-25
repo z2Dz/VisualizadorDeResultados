@@ -1,0 +1,245 @@
+﻿/* ==========================================================================
+   FONTES DOS TEMAS
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
+/* ==========================================================================
+   VARIÁVEIS DE TEMA
+   ========================================================================== */
+
+:root {
+    --color-1: #15203c;
+    --color-2: #182443;
+    --color-3: #1b294b;
+    --color-4: #313e5d;
+    --color-5: #48536e;
+    --color-6: #767e93;
+    --color-7: #babec9;
+    --color-8: #e8e9ed;
+    --text: #e8e9ed;
+    --subtext: #767e93;
+    --success: #3d8200;
+    --btns: #111827;
+    --pontual: #bd9808;
+    /* tokens usados pelos temas nomeados (RetroOS, AFC, etc.) */
+    --panel-bg: rgba(10, 25, 50, .65);
+    --panel-border-color: rgba(120, 160, 255, .18);
+    --panel-border-width: 1px;
+    --radius: 14px;
+    --shadow-soft: none;
+    --shadow-card: none;
+    --accent: #356dc9;
+    --accent-2: #7fb0ff;
+    --accent-text: #ffffff;
+    --input-bg: rgba(10, 25, 50, .70);
+    --input-border: rgba(120,160,255,.18);
+    --input-text: #ffffff;
+    --overlay-soft: rgba(255,255,255,.08);
+    --shadow-hover: 0 8px 18px rgba(0,0,0,.18);
+    --font-main: 'Segoe UI', sans-serif;
+    --font-heading: 'Segoe UI', sans-serif;
+    --bar-home: #2563eb;
+    --bar-draw: #767e93;
+    --bar-away: #dc2626;
+}
+
+/* ==========================================================================
+   RETRO OS — bege/verde-petróleo, bordas em bisel, fonte de terminal CRT
+   ========================================================================== */
+[data-theme="retroos"] {
+    --color-1: #d8d0ba;
+    --text: #1f2a28;
+    --subtext: #55605c;
+    --panel-bg: #ece6d5;
+    --panel-border-color: #1f3d3a;
+    --panel-border-width: 2px;
+    --radius: 2px;
+    --shadow-soft: 2px 2px 6px rgba(0,0,0,.25);
+    --shadow-card: 1px 1px 4px rgba(0,0,0,.2);
+    --accent: #2f6f62;
+    --accent-2: #2f6f62;
+    --accent-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #cfc7ae;
+    --input-text: #1f2a28;
+    --font-main: "VT323", "Courier New", monospace;
+    --font-heading: "VT323", "Courier New", monospace;
+    --overlay-soft: rgba(0,0,0,.06);
+    --shadow-hover: 0 4px 10px rgba(0,0,0,.25);
+    --bar-home: #3a6ea5;
+    --bar-draw: #8a8370;
+    --bar-away: #a1402f;
+}
+
+/* ==========================================================================
+   AFC — vermelho profundo + dourado sobre fundo claro, tipografia de cartaz
+   ========================================================================== */
+[data-theme="afc"] {
+    --color-1: #fdf3e7;
+    --text: #201208;
+    --subtext: #7a5c46;
+    --panel-bg: #fffaf2;
+    --panel-border-color: #7a0c0c;
+    --panel-border-width: 2px;
+    --radius: 10px;
+    --shadow-soft: 0 2px 6px rgba(122,12,12,.22);
+    --shadow-card: 0 3px 12px rgba(122,12,12,.18);
+    --accent: #c8112b;
+    --accent-2: #e8b923;
+    --accent-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #7a0c0c;
+    --input-text: #201208;
+    --font-main: "Oswald", "Segoe UI", sans-serif;
+    --font-heading: "Anton", "Oswald", sans-serif;
+    --overlay-soft: rgba(122,12,12,.06);
+    --shadow-hover: 0 6px 14px rgba(122,12,12,.22);
+    --bar-home: #1d4e89;
+    --bar-draw: #b8a48a;
+    --bar-away: #c8112b;
+}
+
+/* ==========================================================================
+   DESENHO À MÃO — papel & tinta, traços tremidos
+   ========================================================================== */
+[data-theme="sketch"] {
+    --color-1: #fffaf0;
+    --text: #2b2b2b;
+    --subtext: #5c5c5c;
+    --panel-bg: #fffdf6;
+    --panel-border-color: #333333;
+    --panel-border-width: 2.5px;
+    --radius: 6px;
+    --shadow-soft: 2px 2px 0 #333333;
+    --shadow-card: 3px 3px 0 #333333;
+    --accent: #d9480f;
+    --accent-2: #d9480f;
+    --accent-text: #fff8f0;
+    --input-bg: #fffdf6;
+    --input-border: #333333;
+    --input-text: #2b2b2b;
+    --font-main: "Kalam", "Comic Neue", cursive;
+    --font-heading: "Caveat", "Kalam", cursive;
+    --overlay-soft: rgba(0,0,0,.05);
+    --shadow-hover: 3px 3px 0 #333333;
+    --bar-home: #2f6690;
+    --bar-draw: #999183;
+    --bar-away: #b03a2e;
+}
+
+/* ==========================================================================
+   MINIMALISTA — preto e branco, sombra sólida, lima como destaque
+   ========================================================================== */
+[data-theme="minimal"] {
+    --color-1: #f5f3ec;
+    --text: #111111;
+    --subtext: #6b6b6b;
+    --panel-bg: #ffffff;
+    --panel-border-color: #111111;
+    --panel-border-width: 3px;
+    --radius: 0px;
+    --shadow-soft: 4px 4px 0 #111111;
+    --shadow-card: 3px 3px 0 #111111;
+    --accent: #d7ff3f;
+    --accent-2: #d7ff3f;
+    --accent-text: #111111;
+    --input-bg: #ffffff;
+    --input-border: #111111;
+    --input-text: #111111;
+    --font-main: "Space Grotesk", "Arial Black", sans-serif;
+    --font-heading: "Archivo Black", "Space Grotesk", sans-serif;
+    --overlay-soft: rgba(0,0,0,.06);
+    --shadow-hover: 5px 5px 0 #111111;
+    --bar-home: #1a56db;
+    --bar-draw: #6b6b6b;
+    --bar-away: #e63946;
+}
+
+/* ==========================================================================
+   NEOBRUTALISTA — bordas grossas pretas, sombra sólida, azul/amarelo
+   ========================================================================== */
+[data-theme="brutal"] {
+    --color-1: #f5f0e8;
+    --text: #111111;
+    --subtext: #4a4a4a;
+    --panel-bg: #ffffff;
+    --panel-border-color: #000000;
+    --panel-border-width: 3px;
+    --radius: 4px;
+    --shadow-soft: 6px 6px 0 #000000;
+    --shadow-card: 4px 4px 0 #000000;
+    --accent: #2b59ff;
+    --accent-2: #ffde59;
+    --accent-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #000000;
+    --input-text: #111111;
+    --font-main: 'Segoe UI', sans-serif;
+    --font-heading: 'Segoe UI', sans-serif;
+    --overlay-soft: rgba(0,0,0,.06);
+    --shadow-hover: 6px 6px 0 #000000;
+    --bar-home: #2b59ff;
+    --bar-draw: #4a4a4a;
+    --bar-away: #ff3b3b;
+}
+
+/* ==========================================================================
+   PIXEL ART — 8-bit de fliperama, cantos retos, sombra em degrau
+   ========================================================================== */
+[data-theme="pixel"] {
+    --color-1: #e8ecf1;
+    --text: #1f1f1f;
+    --subtext: #5a5a5a;
+    --panel-bg: #ffffff;
+    --panel-border-color: #1f1f1f;
+    --panel-border-width: 3px;
+    --radius: 0px;
+    --shadow-soft: 4px 4px 0 #1f1f1f;
+    --shadow-card: 3px 3px 0 #1f1f1f;
+    --accent: #ff5252;
+    --accent-2: #2ecc71;
+    --accent-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #1f1f1f;
+    --input-text: #1f1f1f;
+    --font-main: "Press Start 2P", "Courier New", monospace;
+    --font-heading: "Press Start 2P", "Courier New", monospace;
+    --overlay-soft: rgba(0,0,0,.06);
+    --shadow-hover: 4px 4px 0 #1f1f1f;
+    --bar-home: #4a90d9;
+    --bar-draw: #5a5a5a;
+    --bar-away: #ff5252;
+}
+
+/* ==========================================================================
+   RETROFUTURISTA — synthwave, neon rosa/ciano sobre roxo escuro
+   ========================================================================== */
+[data-theme="retro"] {
+    --color-1: #0d0221;
+    --text: #00f6ff;
+    --subtext: #7fd9e0;
+    --panel-bg: #150532;
+    --panel-border-color: #ff2e97;
+    --panel-border-width: 1px;
+    --radius: 14px;
+    --shadow-soft: 0 0 10px #ff2e97, 0 0 18px rgba(0,246,255,.5);
+    --shadow-card: 0 0 8px rgba(255,46,151,.6);
+    --accent: #ff2e97;
+    --accent-2: #00f6ff;
+    --accent-text: #0d0221;
+    --input-bg: #150532;
+    --input-border: #ff2e97;
+    --input-text: #00f6ff;
+    --font-main: "Orbitron", sans-serif;
+    --font-heading: "Orbitron", sans-serif;
+    --overlay-soft: rgba(0,246,255,.10);
+    --shadow-hover: 0 0 16px rgba(255,46,151,.5);
+    --bar-home: #2e6fff;
+    --bar-draw: #7fd9e0;
+    --bar-away: #ff2e97;
+}

@@ -20,7 +20,13 @@
 
                     @foreach (var jogo in Jogos)
                     {
-                        <th>@jogo.MandanteSigla x @jogo.VisitanteSigla</th>
+                        <th>
+                            <span class="jogo-confronto">@jogo.MandanteSigla x @jogo.VisitanteSigla</span>
+                            @if (jogo.GolsMandante.HasValue && jogo.GolsVisitante.HasValue)
+                            {
+                                <span class="jogo-placar-real">@jogo.GolsMandante x @jogo.GolsVisitante</span>
+                            }
+                        </th>
                     }
 
                     <th>Total</th>
@@ -30,22 +36,22 @@
             <tbody>
                 @foreach (var jogador in LinhasFiltradas)
                 {
-                    <tr>
-                        <td class="posicao-col">@jogador.Posicao</td>
-                        <td class="jogador-col">@jogador.Nome</td>
+                    <tr class="palpites-row @GetClasseLinha(jogador.Posicao)">
+                        <td class="posicao-col palpites-cell @GetClasseRank(jogador.Posicao)">@jogador.Posicao</td>
+                        <td class="jogador-col palpites-cell">@jogador.Nome</td>
 
                         @foreach (var jogo in Jogos)
                         {
                             var palpite = jogador.Palpites.FirstOrDefault(p => p.RodadaJogoId == jogo.RodadaJogoId);
 
-                            <td>
+                            <td class="palpites-cell">
                                 <span class="palpite @(GetClassePalpite(palpite))">
                                     @(palpite?.PalpiteLabel ?? "-")
                                 </span>
                             </td>
                         }
 
-                        <td class="total-col">@jogador.Total</td>
+                        <td class="total-col palpites-cell">@jogador.Total</td>
                     </tr>
                 }
             </tbody>
@@ -77,23 +83,41 @@
 
     private string filtroJogador = "";
 
-    private List<LinhaJogador> Linhas =>
-        Palpites
-            .GroupBy(p => new { p.JogadoresId, p.JogadoresNome })
-            .Select(g => new LinhaJogador
+    private List<LinhaJogador> Linhas
+    {
+        get
+        {
+            var ordenados = Palpites
+                .GroupBy(p => new { p.JogadoresId, p.JogadoresNome })
+                .Select(g => new LinhaJogador
+                {
+                    Nome = g.Key.JogadoresNome,
+                    Palpites = g.ToList(),
+                    Total = g.Sum(x => x.PalpiteTotalPontos ?? 0)
+                })
+                .OrderByDescending(x => x.Total)
+                .ThenBy(x => x.Nome)
+                .ToList();
+
+            // Ranking por pontuação: jogadores empatados dividem a mesma
+            // posição (1, 1, 3, 4...), em vez de um índice sequencial fixo.
+            var posicaoAtual = 0;
+            int? totalAnterior = null;
+
+            for (var i = 0; i < ordenados.Count; i++)
             {
-                Nome = g.Key.JogadoresNome,
-                Palpites = g.ToList(),
-                Total = g.Sum(x => x.PalpiteTotalPontos ?? 0)
-            })
-            .OrderByDescending(x => x.Total)
-            .ThenBy(x => x.Nome)
-            .Select((x, index) =>
-            {
-                x.Posicao = index + 1;
-                return x;
-            })
-            .ToList();
+                if (totalAnterior is null || ordenados[i].Total != totalAnterior)
+                {
+                    posicaoAtual = i + 1;
+                    totalAnterior = ordenados[i].Total;
+                }
+
+                ordenados[i].Posicao = posicaoAtual;
+            }
+
+            return ordenados;
+        }
+    }
 
     private List<LinhaJogador> LinhasFiltradas =>
         string.IsNullOrWhiteSpace(filtroJogador)
@@ -114,6 +138,22 @@
             _ => ""
         };
     }
+
+    private string GetClasseLinha(int posicao) => posicao switch
+    {
+        1 => "linha-ouro",
+        2 => "linha-prata",
+        3 => "linha-bronze",
+        _ => ""
+    };
+
+    private string GetClasseRank(int posicao) => posicao switch
+    {
+        1 => "rank-1",
+        2 => "rank-2",
+        3 => "rank-3",
+        _ => ""
+    };
 
     private class LinhaJogador
     {

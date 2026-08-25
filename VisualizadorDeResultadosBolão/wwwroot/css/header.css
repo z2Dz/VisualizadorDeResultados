@@ -1,14 +1,19 @@
-﻿.app-header {
+﻿/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.app-header {
     padding: 26px 28px 12px;
     display: flex;
-    background: rgba(10, 25, 50, .65);
+    background: var(--panel-bg);
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    border: 1px solid rgba(120, 160, 255, .18);
-    border-radius: 14px;
+    border: var(--panel-border-width) solid var(--panel-border-color);
+    border-radius: var(--radius);
     margin-bottom: 20px;
     margin-top: 10px;
+    color: var(--text);
 }
 
 .header-left {
@@ -26,9 +31,11 @@
 
 .header-text h1 {
     margin: 0;
+    font-family: var(--font-heading);
     font-size: clamp(28px, 4vw, 52px);
     font-weight: 900;
     line-height: 1.1;
+    color: var(--text);
 }
 
 .header-subrow {
@@ -43,6 +50,7 @@
         margin: 0;
         font-size: 18px;
         opacity: .75;
+        color: var(--subtext);
     }
 
 .header-actions,
@@ -51,16 +59,46 @@
     align-items: center;
 }
 
-[data-theme="light"] .app-header {
-    background: #f3f3f3 !important;
-    border: 1px solid rgba(0,0,0,.05) !important;
-    color: #111 !important;
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .app-header {
+        padding: 16px !important;
+        margin-bottom: 14px !important;
+        border-radius: var(--radius);
+        align-items: flex-start;
+        gap: 20px;
+        flex-direction: column;
+        box-shadow: var(--shadow-card, none);
+    }
+
+    .header-left {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-logo {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .header-text h1 {
+        font-size: 22px !important;
+        line-height: 1.15 !important;
+    }
+
+    .header-subrow {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100%;
+        margin-top: 6px !important;
+        gap: 10px !important;
+        flex-wrap: nowrap !important;
+    }
+
+        .header-subrow p {
+            font-size: 14px !important;
+        }
 }
-
-    [data-theme="light"] .app-header h1 {
-        color: #111 !important;
-    }
-
-    [data-theme="light"] .app-header p {
-        color: #555 !important;
-    }

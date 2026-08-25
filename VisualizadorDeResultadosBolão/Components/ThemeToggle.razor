@@ -1,23 +1,31 @@
 ﻿@inject IJSRuntime JS
 
-<div class="theme-switch @(isDark ? "dark" : "light")" @onclick="ToggleTheme">
-    <div class="switch-thumb">
-        <span>@(isDark ? "🌙" : "☀️")</span>
-    </div>
-</div>
+<select class="theme-select" value="@temaAtual" @onchange="OnThemeChanged">
+    @foreach (var tema in temas)
+    {
+        <option value="@tema.Id">@tema.Label</option>
+    }
+</select>
 
 @code {
-    private bool isDark = true;
+    private List<TemaOpcao> temas = new();
+    private string temaAtual = "Minimalista";
 
     protected override async Task OnInitializedAsync()
     {
-        var theme = await JS.InvokeAsync<string>("themeManager.loadTheme");
-        isDark = theme != "light";
+        temas = await JS.InvokeAsync<List<TemaOpcao>>("themeManager.getThemes");
+        temaAtual = await JS.InvokeAsync<string>("themeManager.loadTheme");
     }
 
-    private async Task ToggleTheme()
+    private async Task OnThemeChanged(ChangeEventArgs e)
     {
-        isDark = !isDark;
-        await JS.InvokeVoidAsync("themeManager.setTheme", isDark ? "dark" : "light");
+        temaAtual = e.Value?.ToString() ?? "Minimalista";
+        await JS.InvokeVoidAsync("themeManager.setTheme", temaAtual);
+    }
+
+    private class TemaOpcao
+    {
+        public string Id { get; set; } = "";
+        public string Label { get; set; } = "";
     }
 }

@@ -1,10 +1,15 @@
-﻿.site-footer {
+﻿/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
     margin-top: 28px;
     padding: 22px 18px;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,.06);
+    border-top: var(--panel-border-width) solid var(--panel-border-color);
     color: var(--subtext);
     font-size: 14px;
+    font-family: var(--font-main);
 }
 
 .footer-content {
@@ -20,9 +25,15 @@
 .site-footer small {
     opacity: .65;
 }
-/* LIGHT MODE */
 
-[data-theme="light"] .site-footer {
-    border-top: 1px solid rgba(0,0,0,.06);
-    color: #555;
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .site-footer {
+        font-size: 12px;
+        padding: 18px 14px;
+    }
+
+        .site-footer p {
+            line-height: 1.5;
+        }
 }
