@@ -193,6 +193,69 @@
         color: var(--pontual);
     }
 
+[data-theme="sketch"] .palpite {
+    border-radius: 8px 4px 9px 5px / 5px 9px 4px 8px;
+    font-family: 'Patrick Hand', cursive;
+    font-weight: 700;
+    border: 2px solid transparent;
+}
+
+    [data-theme="sketch"] .palpite.certo {
+        background: var(--green);
+        border-color: var(--green-border);
+        color: #3d6b1f;
+    }
+
+    [data-theme="sketch"] .palpite.pontual {
+        background: var(--orange);
+        border-color: var(--orange-border);
+        color: #b6491a;
+    }
+
+[data-theme="sketch"] .palpites-table tbody tr:nth-child(odd) .palpite {
+    transform: rotate(-.8deg);
+}
+
+[data-theme="sketch"] .palpites-table tbody tr:nth-child(even) .palpite {
+    transform: rotate(.8deg);
+}
+
+[data-theme="sketch"] .busca-jogador-box {
+    position: relative;
+}
+
+[data-theme="sketch"] .busca-jogador-input {
+    background: #ffd3be;
+    border: 2px solid var(--panel-border-color);
+    border-radius: 30px 12px 30px 12px / 12px 30px 12px 30px;
+    font-family: 'Patrick Hand', cursive;
+    box-shadow: none;
+    transform: rotate(-.5deg);
+}
+
+    [data-theme="sketch"] .busca-jogador-input::placeholder {
+        color: var(--subtext);
+        opacity: .85;
+    }
+
+[data-theme="sketch"] .palpites-table th {
+    border-bottom: 2px solid rgba(0,0,0,.25);
+    background: transparent;
+}
+
+[data-theme="sketch"] .palpites-table td {
+    border-bottom: 1px dashed rgba(0,0,0,.15);
+}
+
+[data-theme="sketch"] .palpites-table tbody tr:nth-child(odd),
+[data-theme="sketch"] .palpites-table tbody tr:nth-child(even) {
+    background: transparent;
+}
+
+[data-theme="sketch"] .footer-total {
+    color: var(--accent);
+}
+
 /* ==========================================================================
    DESTAQUE DO PÓDIO (1º, 2º, 3º lugar)
    ========================================================================== */
@@ -270,4 +333,9 @@
 .footer-total {
     font-size: 18px;
     font-weight: 900;
+}
+
+[data-theme="pixel"] .footer-total,
+[data-theme="pixel"] .total-col {
+    color: #95d600;
 }

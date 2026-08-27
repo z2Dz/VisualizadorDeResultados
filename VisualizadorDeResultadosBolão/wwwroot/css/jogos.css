@@ -27,6 +27,7 @@
     font-family: var(--font-main);
     box-shadow: var(--shadow-card);
     transition: transform .2s ease, box-shadow .2s ease;
+    min-width: 0;
 }
 
     .jogo-card:hover {
@@ -89,6 +90,90 @@
         color: var(--subtext);
         font-weight: 700;
     }
+
+[data-theme="pixel"] .placar-box strong,
+[data-theme="pixel"] .placar-mobile strong {
+    background: #c4ff32;
+    border-color: #000000;
+}
+
+[data-theme="sketch"] .placar-box strong,
+[data-theme="sketch"] .placar-mobile strong {
+    background-color: #fff8f3;
+    background-image: var(--sketch-border-accent);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    border: none;
+    border-radius: 8px;
+    min-width: 30px;
+    padding: 5px 15px;
+    font-family: 'Patrick Hand', cursive;
+    display: inline-block;
+    transform: rotate(-1.5deg);
+}
+
+    [data-theme="sketch"] .placar-box strong:last-of-type,
+    [data-theme="sketch"] .placar-mobile strong:last-of-type {
+        transform: rotate(1.8deg);
+    }
+
+[data-theme="sketch"] .times-row,
+[data-theme="sketch"] .time-mobile {
+    font-size: 1.05em;
+}
+
+[data-theme="sketch"] .stats-bar {
+    border-radius: 10px;
+}
+
+[data-theme="pixel"] .jogo-card {
+    padding: 10px 6px;
+}
+
+    [data-theme="pixel"] .jogo-card * {
+        min-width: 0;
+    }
+
+[data-theme="pixel"] .times-row {
+    font-size: 10px;
+}
+
+    [data-theme="pixel"] .times-row span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+[data-theme="pixel"] .placar-box {
+    font-size: 14px;
+    gap: 6px;
+}
+
+    [data-theme="pixel"] .placar-box strong {
+        padding: 2px 6px;
+        min-width: 14px;
+    }
+
+[data-theme="pixel"] .jogo-card small {
+    font-size: 7.5px;
+    line-height: 1.5;
+}
+
+[data-theme="pixel"] .stats-labels,
+[data-theme="pixel"] .stats-percent {
+    font-size: 7px;
+}
+
+[data-theme="pixel"] .escudos-row {
+    gap: 8px;
+    margin: 8px 0;
+}
+
+[data-theme="pixel"] .time-escudo {
+    width: 30px !important;
+    height: 30px !important;
+}
 
 /* ==========================================================================
    BARRA DE ESTATÍSTICAS (probabilidade casa/empate/fora)

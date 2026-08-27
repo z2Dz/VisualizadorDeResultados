@@ -26,6 +26,11 @@
     opacity: .65;
 }
 
+[data-theme="sketch"] .site-footer {
+    border-top: 2px dashed var(--panel-border-color);
+    font-family: 'Patrick Hand', cursive;
+}
+
 /* RESPONSIVO */
 @media (max-width: 768px) {
     .site-footer {

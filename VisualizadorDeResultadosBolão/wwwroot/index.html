@@ -14,6 +14,7 @@
     <link href="css/jogos.css" rel="stylesheet" />
     <link href="css/tabelaPalpites.css" rel="stylesheet" />
     <link href="css/footer.css" rel="stylesheet" />
+    <link href="css/layout.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="images/Icone.ico" />
     <link href="VisualizadorDeResultadosBolão.styles.css" rel="stylesheet" />
     <link rel="manifest" href="manifest.json" />
@@ -21,18 +22,104 @@
     <link rel="icon" type="image/x-icon" href="images/Icone.ico" />
     <link rel="shortcut icon" href="images/Icone.ico" />
     <script type="importmap"></script>
+    <style>
+        /* Garantia inline: a splash sempre fica centralizada e no tamanho certo,
+           mesmo que layout.css não carregue por algum motivo de build/path. */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            opacity: 1;
+            transition: opacity .5s ease;
+            overflow: hidden;
+        }
+
+            #splash-screen.splash-hide {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+        #splash-video {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <div class="splash-screen">
-            <img src="images/logo.png" alt="Logo" class="splash-logo"/>
-        </div>
+    <div id="splash-screen" class="splash-screen">
+        <video id="splash-video" class="splash-video" autoplay muted playsinline poster="images/logo.png"></video>
     </div>
+
+    <div id="app"></div>
 
     <script src="css/theme.js"></script>
     <script src="installPrompt.js"></script>
-    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+    <script>
+        var __splashState = { videoDone: false, appDone: false };
+
+        function __splashTryReveal() {
+            var splash = document.getElementById('splash-screen');
+            if (__splashState.videoDone && __splashState.appDone && splash) {
+                splash.classList.add('splash-hide');
+                splash.addEventListener('transitionend', function remove() {
+                    splash.removeEventListener('transitionend', remove);
+                    if (splash.parentNode) splash.parentNode.removeChild(splash);
+                });
+            }
+        }
+
+        (function () {
+            var video = document.getElementById('splash-video');
+            if (video) {
+                var isMobile = window.matchMedia('(max-width: 768px)').matches
+                    || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+                var videoSrc = isMobile
+                    ? 'videos/splash-video-mobile.mp4'
+                    : 'videos/splash-video.mp4';
+
+                var source = document.createElement('source');
+                source.src = videoSrc;
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                video.load();
+                video.play().catch(function () { /* autoplay pode falhar silenciosamente em alguns navegadores; a splash cai pelo timeout de segurança */ });
+
+                video.addEventListener('ended', function () { __splashState.videoDone = true; __splashTryReveal(); });
+                video.addEventListener('error', function () { __splashState.videoDone = true; __splashTryReveal(); });
+            } else {
+                __splashState.videoDone = true;
+            }
+
+            // Trava de segurança: nunca prende o usuário na splash por mais de 15s.
+            setTimeout(function () {
+                __splashState.videoDone = true;
+                __splashState.appDone = true;
+                __splashTryReveal();
+            }, 15000);
+        })();
+    </script>
+    <script src="_framework/blazor.webassembly#[.{fingerprint}].js" autostart="false"></script>
+    <script>
+        Blazor.start().then(function () {
+            __splashState.appDone = true;
+            __splashTryReveal();
+        }).catch(function (err) {
+            console.error('Erro ao iniciar o Blazor:', err);
+            __splashState.appDone = true;
+            __splashTryReveal();
+        });
+    </script>
 
 </body>
 

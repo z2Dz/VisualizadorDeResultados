@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
@@ -108,28 +109,40 @@
    DESENHO À MÃO — papel & tinta, traços tremidos
    ========================================================================== */
 [data-theme="sketch"] {
-    --color-1: #fffaf0;
-    --text: #2b2b2b;
-    --subtext: #5c5c5c;
-    --panel-bg: #fffdf6;
-    --panel-border-color: #333333;
-    --panel-border-width: 2.5px;
-    --radius: 6px;
-    --shadow-soft: 2px 2px 0 #333333;
-    --shadow-card: 3px 3px 0 #333333;
-    --accent: #d9480f;
-    --accent-2: #d9480f;
-    --accent-text: #fff8f0;
-    --input-bg: #fffdf6;
-    --input-border: #333333;
-    --input-text: #2b2b2b;
-    --font-main: "Kalam", "Comic Neue", cursive;
-    --font-heading: "Caveat", "Kalam", cursive;
+    --color-1: #f7f2e8;
+    --text: #232323;
+    --subtext: #5c5652;
+    --panel-bg: rgba(255,255,255,.35);
+    --panel-border-color: #222222;
+    --panel-border-width: 2px;
+    --radius: 22px;
+    --shadow-soft: none;
+    --shadow-card: none;
+    --accent: #e96d2f;
+    --accent-2: #e96d2f;
+    --accent-text: #fff8f3;
+    --input-bg: #fffdf9;
+    --input-border: #222222;
+    --input-text: #232323;
+    --font-main: "Patrick Hand", cursive;
+    --font-heading: "Patrick Hand", cursive;
     --overlay-soft: rgba(0,0,0,.05);
-    --shadow-hover: 3px 3px 0 #333333;
-    --bar-home: #2f6690;
-    --bar-draw: #999183;
-    --bar-away: #b03a2e;
+    --shadow-hover: none;
+    --bar-home: #2a9b58;
+    --bar-draw: #b8ac86;
+    --bar-away: #d53939;
+    --success: #2a9b58;
+    --pontual: #e96d2f;
+    --green: #d8ebb0;
+    --green-border: #9cbf56;
+    --orange: #ffe0cf;
+    --orange-border: #eb7434;
+    /* raios assimétricos usados nas bordas "desenhadas à mão" */
+    --sketch-radius-a: 24px 9px 26px 11px / 11px 24px 9px 26px;
+    --sketch-radius-b: 10px 25px 8px 23px / 23px 8px 25px 10px;
+    /* contornos SVG com traço trêmulo de verdade (não é só border-radius) */
+    --sketch-border-ink: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M%203.50%2C4.73%20C%206.48%2C1.63%2015.90%2C3.84%2022.10%2C3.53%20C%2028.30%2C3.21%2034.50%2C3.01%2040.70%2C2.82%20C%2046.90%2C2.64%2053.10%2C2.37%2059.30%2C2.40%20C%2065.50%2C2.42%2071.83%2C2.80%2077.90%2C2.99%20C%2083.97%2C3.17%2092.25%2C0.31%2095.70%2C3.50%20C%2099.14%2C6.69%2098.18%2C15.90%2098.56%2C22.10%20C%2098.95%2C28.30%2098.35%2C34.50%2098.01%2C40.70%20C%2097.67%2C46.90%2096.37%2C53.10%2096.54%2C59.30%20C%2096.71%2C65.50%2099.04%2C71.65%2099.03%2C77.90%20C%2099.02%2C84.15%20100.02%2C93.64%2096.50%2C96.82%20C%2092.98%2C99.99%2084.10%2C97.39%2077.90%2C96.94%20C%2071.70%2C96.50%2065.50%2C94.23%2059.30%2C94.16%20C%2053.10%2C94.10%2046.90%2C96.08%2040.70%2C96.54%20C%2034.50%2C97.00%2028.33%2C96.91%2022.10%2C96.91%20C%2015.87%2C96.90%206.68%2C99.67%203.33%2C96.50%20C%20-0.02%2C93.33%202.25%2C84.10%202.00%2C77.90%20C%201.75%2C71.70%201.49%2C65.50%201.84%2C59.30%20C%202.19%2C53.10%203.69%2C46.90%204.09%2C40.70%20C%204.49%2C34.50%204.33%2C28.10%204.23%2C22.10%20C%204.13%2C16.10%200.52%2C7.82%203.50%2C4.73%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23222222%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+    --sketch-border-accent: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M%205.00%2C5.56%20C%209.19%2C1.83%2020.00%2C5.27%2027.50%2C5.13%20C%2035.00%2C5.00%2042.50%2C4.48%2050.00%2C4.77%20C%2057.50%2C5.06%2064.91%2C6.85%2072.50%2C6.88%20C%2080.09%2C6.92%2091.25%2C1.56%2095.52%2C5.00%20C%2099.80%2C8.44%2098.17%2C20.00%2098.17%2C27.50%20C%2098.18%2C35.00%2096.44%2C42.50%2095.56%2C50.00%20C%2094.68%2C57.50%2092.99%2C65.13%2092.90%2C72.50%20C%2092.81%2C79.87%2098.40%2C90.73%2095.00%2C94.24%20C%2091.60%2C97.74%2080.00%2C93.05%2072.50%2C93.54%20C%2065.00%2C94.03%2057.50%2C96.94%2050.00%2C97.16%20C%2042.50%2C97.39%2034.93%2C95.25%2027.50%2C94.89%20C%2020.07%2C94.53%209.46%2C98.73%205.42%2C95.00%20C%201.39%2C91.27%202.89%2C80.00%203.29%2C72.50%20C%203.70%2C65.00%208.01%2C57.50%207.85%2C50.00%20C%207.70%2C42.50%202.83%2C34.91%202.35%2C27.50%20C%201.88%2C20.09%200.81%2C9.29%205.00%2C5.56%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23e96d2f%22%20stroke-width%3D%223.0%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
 }
 
 /* ==========================================================================
@@ -192,28 +205,30 @@
    PIXEL ART — 8-bit de fliperama, cantos retos, sombra em degrau
    ========================================================================== */
 [data-theme="pixel"] {
-    --color-1: #e8ecf1;
+    --color-1: #edf2f8;
     --text: #1f1f1f;
     --subtext: #5a5a5a;
     --panel-bg: #ffffff;
-    --panel-border-color: #1f1f1f;
-    --panel-border-width: 3px;
+    --panel-border-color: #000000;
+    --panel-border-width: 4px;
     --radius: 0px;
-    --shadow-soft: 4px 4px 0 #1f1f1f;
-    --shadow-card: 3px 3px 0 #1f1f1f;
-    --accent: #ff5252;
-    --accent-2: #2ecc71;
-    --accent-text: #ffffff;
+    --shadow-soft: 4px 4px 0 #000000;
+    --shadow-card: 6px 6px 0 #000000;
+    --accent: #b9ff31;
+    --accent-2: #c4ff32;
+    --accent-text: #111111;
     --input-bg: #ffffff;
-    --input-border: #1f1f1f;
+    --input-border: #000000;
     --input-text: #1f1f1f;
     --font-main: "Press Start 2P", "Courier New", monospace;
     --font-heading: "Press Start 2P", "Courier New", monospace;
     --overlay-soft: rgba(0,0,0,.06);
-    --shadow-hover: 4px 4px 0 #1f1f1f;
-    --bar-home: #4a90d9;
+    --shadow-hover: 8px 8px 0 #000000;
+    --bar-home: #32cc4f;
     --bar-draw: #5a5a5a;
-    --bar-away: #ff5252;
+    --bar-away: #ff3d3d;
+    --success: #32cc4f;
+    --pontual: #ffe34d;
 }
 
 /* ==========================================================================

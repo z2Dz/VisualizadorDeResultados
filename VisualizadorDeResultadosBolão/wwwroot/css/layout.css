@@ -7,17 +7,123 @@ body {
     font-family: var(--font-main);
     background: radial-gradient(circle at bottom right, rgba(146, 167, 187, .72), transparent 35%), var(--color-1);
     color: var(--text);
+    overflow-x: hidden;
 }
 
 .page-shell {
     min-height: 100vh;
     background: radial-gradient(circle at bottom right, rgba(146, 167, 187, .72), transparent 35%), var(--color-1);
+    overflow-x: hidden;
 }
 
 .main-container {
     padding: 0 20px 32px;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* ==========================================================================
+   PIXEL ART — fundo em grade de pontos
+   ========================================================================== */
+[data-theme="pixel"] body,
+[data-theme="pixel"] .page-shell {
+    background: radial-gradient(circle, #dfe7f2 1px, transparent 1px);
+    background-size: 8px 8px;
+    background-color: var(--color-1);
+}
+
+/* ==========================================================================
+   DESENHO À MÃO — papel pontilhado + moldura torta desenhada à mão
+   ========================================================================== */
+[data-theme="sketch"] body,
+[data-theme="sketch"] .page-shell {
+    background: radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+    background-size: 8px 8px;
+    background-color: var(--color-1);
+}
+
+[data-theme="sketch"] .install-card,
+[data-theme="sketch"] .jogo-card,
+[data-theme="sketch"] .jogo-mobile-item,
+[data-theme="sketch"] .jogos-mobile-card {
+    position: relative !important;
+    border: none !important;
+    border-radius: 18px !important;
+    background: var(--panel-bg) !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    z-index: 0;
+}
+
+/* app-header, section-card e palpites-card são largos/baixos (quase
+   full-width): o SVG de tinta (desenhado quase quadrado) fica deformado
+   e gigante nessa proporção. Por isso ganham uma borda "à mão" simples,
+   que não depende da proporção do elemento. */
+[data-theme="sketch"] .section-card,
+[data-theme="sketch"] .app-header,
+[data-theme="sketch"] .palpites-card {
+    position: relative !important;
+    border-radius: 18px !important;
+    background: var(--panel-bg) !important;
+    box-shadow: none !important;
+    border: 2px solid var(--panel-border-color) !important;
+}
+
+[data-theme="sketch"] .install-card::after,
+[data-theme="sketch"] .jogo-card::after,
+[data-theme="sketch"] .jogo-mobile-item::after,
+[data-theme="sketch"] .jogos-mobile-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--sketch-border-ink) !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* cada card gira levemente, pra não ficar tudo igualzinho */
+[data-theme="sketch"] .jogo-card:nth-child(4n+1) {
+    transform: rotate(-.6deg);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+2) {
+    transform: rotate(.5deg);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+3) {
+    transform: rotate(-.4deg);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+4) {
+    transform: rotate(.6deg);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+1):hover {
+    transform: rotate(-.6deg) translateY(-2px);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+2):hover {
+    transform: rotate(.5deg) translateY(-2px);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+3):hover {
+    transform: rotate(-.4deg) translateY(-2px);
+}
+
+[data-theme="sketch"] .jogo-card:nth-child(4n+4):hover {
+    transform: rotate(.6deg) translateY(-2px);
+}
+
+
+[data-theme="sketch"] .jogo-mobile-item:nth-child(odd) {
+    transform: rotate(-.4deg);
+}
+
+[data-theme="sketch"] .jogo-mobile-item:nth-child(even) {
+    transform: rotate(.4deg);
 }
 
 @media (max-width: 768px) {
@@ -46,6 +152,7 @@ body {
     border: var(--panel-border-width) solid var(--panel-border-color);
     border-radius: var(--radius);
     padding: 20px;
+    margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
     color: var(--text);
@@ -120,48 +227,9 @@ body {
 
 /* ==========================================================================
    SPLASH SCREEN
+   (estilos movidos para o <style> inline do index.html — controlado por
+   #splash-screen / #splash-video, não por estas classes)
    ========================================================================== */
-
-.splash-screen {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at bottom right, rgba(90,130,210,.22), transparent 35%), #07142B;
-}
-
-.splash-logo {
-    width: clamp(140px, 20vw, 260px);
-    height: auto;
-    object-fit: contain;
-    display: block;
-    animation: splashPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes splashPulse {
-    0% {
-        transform: scale(1);
-        opacity: .92;
-    }
-
-    50% {
-        transform: scale(1.06);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: .92;
-    }
-}
-
-@media (max-width: 768px) {
-    .splash-logo {
-        width: 150px;
-    }
-}
 
 /* ==========================================================================
    PROMPT DE INSTALAÇÃO (PWA)
@@ -170,12 +238,12 @@ body {
 .install-overlay {
     position: fixed !important;
     inset: 0 !important;
-    z-index: 9999 !important;
+    z-index: 999998 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 20px !important;
-    background: rgba(0,0,0,.35);
+    background: rgba(0, 0, 0, .55) !important;
     transform: none !important;
 }
 
