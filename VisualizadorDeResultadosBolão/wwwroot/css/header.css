@@ -46,7 +46,10 @@
 
 .header-subrow {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    margin-top: 6px;
     gap: 18px;
     margin-top: 10px;
     flex-wrap: wrap;
@@ -57,12 +60,15 @@
         font-size: 18px;
         opacity: .75;
         color: var(--subtext);
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
 .header-actions,
 .inline-theme-toggle {
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
 }
 
 /* RESPONSIVO */

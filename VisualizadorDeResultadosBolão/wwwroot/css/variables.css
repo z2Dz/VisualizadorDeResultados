@@ -112,7 +112,7 @@
     --color-1: #f7f2e8;
     --text: #232323;
     --subtext: #5c5652;
-    --panel-bg: rgba(255,255,255,.35);
+    --panel-bg: rgba(255,255,255,1);
     --panel-border-color: #222222;
     --panel-border-width: 2px;
     --radius: 22px;

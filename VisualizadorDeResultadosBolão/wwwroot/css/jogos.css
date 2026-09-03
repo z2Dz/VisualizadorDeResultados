@@ -82,7 +82,12 @@
         border-radius: 8px;
         padding: 4px 14px;
         min-width: 20px;
-        display: inline-block;
+        min-height: 1em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        text-align: center;
         color: var(--text);
     }
 
@@ -109,7 +114,10 @@
     min-width: 30px;
     padding: 5px 15px;
     font-family: 'Patrick Hand', cursive;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
     transform: rotate(-1.5deg);
 }
 
@@ -354,6 +362,11 @@
             background: var(--overlay-soft);
             border: var(--panel-border-width) solid var(--panel-border-color);
             padding: 4px 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            text-align: center;
         }
 
         .placar-mobile span {

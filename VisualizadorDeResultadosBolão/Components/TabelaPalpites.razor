@@ -36,8 +36,8 @@
             <tbody>
                 @foreach (var jogador in LinhasFiltradas)
                 {
-                    <tr class="palpites-row @GetClasseLinha(jogador.Posicao)">
-                        <td class="posicao-col palpites-cell @GetClasseRank(jogador.Posicao)">@jogador.Posicao</td>
+                    <tr class="palpites-row @GetClasseLinha(jogador.PosicaoPontos)">
+                        <td class="posicao-col palpites-cell @GetClasseRank(jogador.PosicaoPontos)">@jogador.Posicao</td>
                         <td class="jogador-col palpites-cell">@jogador.Nome</td>
 
                         @foreach (var jogo in Jogos)
@@ -99,20 +99,29 @@
                 .ThenBy(x => x.Nome)
                 .ToList();
 
-            // Ranking por pontuação: jogadores empatados dividem a mesma
-            // posição (1, 1, 3, 4...), em vez de um índice sequencial fixo.
-            var posicaoAtual = 0;
+            // Índice sequencial exibido na coluna "#" (1, 2, 3, 4...),
+            // mesmo quando há empate de pontos.
+            for (var i = 0; i < ordenados.Count; i++)
+            {
+                ordenados[i].Posicao = i + 1;
+            }
+
+            // Ranking por pontuação (empatados dividem a mesma posição:
+            // 1, 2, 2, 2, 3, 3...), usado só para colorir ouro/prata/bronze.
+            // Conta apenas quantos valores de pontuação distintos já
+            // apareceram, sem pular números por causa de empates.
+            var posicaoPontosAtual = 0;
             int? totalAnterior = null;
 
             for (var i = 0; i < ordenados.Count; i++)
             {
                 if (totalAnterior is null || ordenados[i].Total != totalAnterior)
                 {
-                    posicaoAtual = i + 1;
+                    posicaoPontosAtual++;
                     totalAnterior = ordenados[i].Total;
                 }
 
-                ordenados[i].Posicao = posicaoAtual;
+                ordenados[i].PosicaoPontos = posicaoPontosAtual;
             }
 
             return ordenados;
@@ -158,6 +167,7 @@
     private class LinhaJogador
     {
         public int Posicao { get; set; }
+        public int PosicaoPontos { get; set; }
         public string Nome { get; set; } = "";
         public int Total { get; set; }
         public List<PalpiteModel> Palpites { get; set; } = new();
